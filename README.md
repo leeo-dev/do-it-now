@@ -12,10 +12,9 @@ O front-end foi desenvolvido em Angular, proporcionando uma experiência de usu�
 
 ```
 npm install
-
 ```
 
-Em seguida, vá para a pasta "client" e instale as dependências do front-end:
+3. Em seguida, vá para a pasta "client" e instale as dependências do front-end:
 ```
 cd client
 npm install
