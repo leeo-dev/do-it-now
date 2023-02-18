@@ -43,6 +43,10 @@ Acesse o aplicativo em seu navegador em http://localhost:3000.
 * Editar tarefas
 * Excluir tarefas
 * Marcar tarefas como concluídas
-* Filtrar tarefas por status (completadas / não completadas)
 * Adicionar categorias
 * Listar tarefas por categoria
+* Listar Categoria
+* Excluir Categoria
+* Editar Categoria
+
+
