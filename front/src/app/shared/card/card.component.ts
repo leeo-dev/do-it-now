@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ICategory } from 'src/app/interfaces/category.interface';
 
@@ -9,6 +9,7 @@ import { ICategory } from 'src/app/interfaces/category.interface';
 })
 export class CardComponent {
   @Input() category: ICategory | null = null;
+  @Output() deleteCategoryEmitter: EventEmitter<number> = new EventEmitter();
 
   constructor(private router: Router) {}
 
@@ -30,5 +31,9 @@ export class CardComponent {
 
   listTodoByCategory() {
     this.router.navigate([`/todo/${this.category?.id}`]);
+  }
+
+  deleteCategory(): void {
+    this.deleteCategoryEmitter.emit(this.category?.id);
   }
 }

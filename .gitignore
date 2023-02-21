@@ -1,1 +1,5 @@
 .history
+front/node_modules
+front/.angular
+front/env
+back/node_modules

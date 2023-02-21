@@ -39,6 +39,7 @@ categoryRouter.post('/', async (req, res) => {
       data: {
         name,
       },
+      include: { todos: true },
     });
     res.json(category);
   } catch (error) {

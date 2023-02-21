@@ -18,4 +18,8 @@ export class CategoryService {
   create(category: { name: string }): Observable<ICategory> {
     return this.http.post<ICategory>(this.pathCategory, category);
   }
+
+  delete(id: number): Observable<null> {
+    return this.http.delete<null>(`${this.pathCategory}/${id}`);
+  }
 }

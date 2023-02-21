@@ -10,6 +10,7 @@ import { TodoComponent } from './todo/todo.component';
 import { CreateTodoModalComponent } from './todo/create-todo-modal/create-todo-modal.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DeleteCategoryModalComponent } from './category/delete-category-modal/delete-category-modal.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CreateCategoryModalComponent,
     TodoComponent,
     CreateTodoModalComponent,
+    DeleteCategoryModalComponent,
   ],
   imports: [
     BrowserModule,

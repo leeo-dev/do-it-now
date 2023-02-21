@@ -11,6 +11,7 @@ import { ICategory, ICategoryParam } from '../interfaces/category.interface';
 export class CategoryComponent implements OnInit, OnDestroy {
   title: string = 'Categories';
   categories: ICategory[] = [];
+  currentId: number = 0;
 
   constructor(
     public modalService: ModalService,
@@ -18,14 +19,16 @@ export class CategoryComponent implements OnInit, OnDestroy {
   ) {}
   ngOnInit(): void {
     this.modalService.register('category');
+    this.modalService.register('delete-category');
     this.listCategories();
   }
   ngOnDestroy(): void {
     this.modalService.unregister('category');
+    this.modalService.unregister('delete-category');
   }
 
-  openModal(): void {
-    this.modalService.toggleModal('category');
+  openModal(id: string): void {
+    this.modalService.toggleModal(id);
   }
 
   listCategories(): void {
@@ -38,6 +41,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
   onListCategoriesSuccess(categories: ICategory[]): void {
     this.categories = categories;
   }
+
   onListCategoriesError(error: unknown): void {}
 
   saveCategory(category: ICategoryParam): void {
@@ -51,4 +55,22 @@ export class CategoryComponent implements OnInit, OnDestroy {
     this.categories.push(category);
   }
   onSaveCategoryError(error: unknown): void {}
+
+  handleDeleteCategory(id: number): void {
+    this.currentId = id;
+    this.openModal('delete-category');
+  }
+
+  deleteCategory(isDelete: boolean): void {
+    if (!isDelete) return;
+    this.categoryService.delete(this.currentId).subscribe({
+      next: () => this.onDeleteCategorySuccess(),
+      error: () => this.onDeleteCategoryError(),
+    });
+  }
+
+  onDeleteCategorySuccess(): void {
+    this.listCategories();
+  }
+  onDeleteCategoryError(): void {}
 }

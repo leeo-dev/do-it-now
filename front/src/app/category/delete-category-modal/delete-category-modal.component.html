@@ -1,0 +1,5 @@
+<app-modal [title]="'ATENÇÃO'" modalId="delete-category">
+  <p>Are you sure you want to delete this category?</p>
+  <button (click)="closeModal()" class='button outline primary' footer>Close</button>
+  <button class='button danger' (click)="delete()" footer>Delete</button>
+</app-modal>
