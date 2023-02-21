@@ -1,11 +1,9 @@
-const { prisma } = require('../helpers/prisma.init');
-
 class CategoryRepository {
   constructor({ category }) {
     this.category = category;
   }
   async create({ name }) {
-    const category = await prisma.category.create({
+    const category = await this.category.create({
       data: { name },
       include: { todos: true },
     });
@@ -13,16 +11,16 @@ class CategoryRepository {
   }
 
   async findAll() {
-    const all = await prisma.category.findMany();
+    const all = await this.category.findMany();
     return all;
   }
 
   async delete({ id }) {
-    await prisma.category.delete({ where: { id } });
+    await this.category.delete({ where: { id } });
   }
 
   async findTodosById({ id }) {
-    const category = await prisma.category.findUnique({
+    const category = await this.category.findUnique({
       where: { id },
       include: { todos: true },
     });
