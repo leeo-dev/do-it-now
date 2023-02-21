@@ -3,7 +3,9 @@ const { prisma } = require('../helpers/prisma.init.js');
 const categoryRouter = Router();
 
 categoryRouter.get('/', async (req, res) => {
-  const categories = await prisma.category.findMany();
+  const categories = await prisma.category.findMany({
+    include: { todos: true },
+  });
   res.json(categories);
 });
 
