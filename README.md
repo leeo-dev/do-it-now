@@ -1,4 +1,4 @@
-# DoItNow - Lista de Terafas
+# DoItNow - Lista de Tarefas
 ## Descrição
 Este é um aplicativo de lista de tarefas que permite que você crie, edite e exclua tarefas com facilidade. A interface é intuitiva e fácil de usar, tornando a organização de suas tarefas uma tarefa fácil e prazerosa.
 
