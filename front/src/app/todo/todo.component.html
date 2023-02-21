@@ -1,0 +1,20 @@
+<app-header></app-header>
+<main class='todo'>
+  <div class="search-container">
+    <input type="text" name="search" id="search" placeholder='Search'>
+    <button class='create' (click)="openModal()">+</button>
+  </div>
+  <section class='todos'>
+    <div class='todo-header'>
+      <h2 class='todo-title'>{{ title }}</h2>
+      <p class='todo-info'>{{tasks.all}} tasks - {{tasks.completed}} Completed</p>
+    </div>
+    <div class="todo-list">
+      <app-todo-item class='todo-item'></app-todo-item>
+      <app-todo-item class='todo-item'></app-todo-item>
+      <app-todo-item class='todo-item'></app-todo-item>
+      <app-todo-item class='todo-item'></app-todo-item>
+    </div>
+  </section>
+</main>
+<app-create-todo-modal></app-create-todo-modal>

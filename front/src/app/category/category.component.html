@@ -1,0 +1,14 @@
+<app-header></app-header>
+<main class='category'>
+  <div class="search-container">
+    <input type="text" name="search" id="search" placeholder='Search'>
+    <button class='create' (click)="openModal()">+</button>
+  </div>
+  <section class='categories'>
+    <h1 class='title'>{{ title | uppercase }}</h1>
+    <div class="category-cards">
+      <app-card *ngFor="let category of categories" [category]="category"></app-card>
+    </div>
+  </section>
+</main>
+<app-create-category-modal (categoryEmitter)="saveCategory($event)"></app-create-category-modal>

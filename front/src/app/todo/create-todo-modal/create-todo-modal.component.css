@@ -1,0 +1,18 @@
+.create {
+  background: #202b5886;
+  color: #b7cae7;
+  font-size: 14px;
+  padding: 12px 16px;
+  border: none;
+  width: 100%;
+  border-radius: 150px;
+}
+
+.create:focus {
+  outline: none;
+  border: 1px solid #2f3b6e;
+}
+
+.create::placeholder {
+  color: #616a96;
+}

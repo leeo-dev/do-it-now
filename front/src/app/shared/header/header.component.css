@@ -1,0 +1,17 @@
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo {
+  padding-top: 128px;
+  padding-bottom: 64px;
+  cursor: pointer;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+  .logo {
+    padding-top: 64px;
+    padding-bottom: 32px;
+  }
+}

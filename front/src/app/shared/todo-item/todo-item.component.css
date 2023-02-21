@@ -1,0 +1,75 @@
+.todo-item {
+  background: #191e41;
+  padding: 16px 25px 16px 16px;
+  width: 100%;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.todo-item .delete {
+  background: transparent;
+  cursor: pointer;
+  border: none;
+}
+
+.todo-item .todo-title {
+  font-size: 16px;
+  color: #b7cae7;
+  margin-left: 8px;
+}
+
+.todo-item .todo-title.checked {
+  text-decoration: line-through;
+  color: #42608f;
+}
+
+/* CHECKBOX */
+
+input[type="checkbox"] {
+  /* esconder o checkbox original */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 25px;
+  height: 25px;
+  border: 2px solid #b7cae7;
+  border-radius: 4px;
+  background-color: transparent;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  margin-right: 10px;
+}
+
+input[type="checkbox"]::before {
+  /* adicionar o check */
+  content: "";
+  position: absolute;
+  display: inline-block;
+  background-image: url("/assets/icon/check.svg");
+  background-size: 100% 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  color: transparent;
+}
+
+input[type="checkbox"]:checked::before {
+  /* adicionar o sinal de visto quando o checkbox estiver selecionado */
+  content: "\2714";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+}
+
+input[type="checkbox"]:focus {
+  /* destacar o checkbox quando ele estiver em foco */
+  outline: none;
+  border-color: #6a9afa;
+  box-shadow: 0 0 2px #6a9afa;
+}

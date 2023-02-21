@@ -1,0 +1,63 @@
+.card {
+  background: #192348;
+  padding: 16px 24px;
+  width: 250px;
+  border-radius: 7px;
+  transition: all 0.2s ease-in-out;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-header button {
+  background: transparent;
+  border: none;
+  height: 15px;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.card-header button svg {
+  height: 16px;
+}
+
+.card:hover {
+  -webkit-box-shadow: 0px 10px 39px 10px rgba(8, 11, 26, 0.53);
+  -moz-box-shadow: 0px 10px 39px 10px rgba(8, 11, 26, 0.53);
+  box-shadow: 0px 10px 39px 10px rgba(8, 11, 26, 0.53);
+}
+
+.card-title {
+  color: #abb3d5;
+  font-size: 18px;
+  font-weight: normal;
+  margin-bottom: 8px;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.card-title:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.card-tasks-info {
+  color: #4a5684;
+  margin-bottom: 32px;
+  font-size: 12px;
+}
+
+.card-tasks-progress-background {
+  width: 100%;
+  height: 8px;
+  background-color: #2b3d72;
+  border-radius: 100px;
+}
+
+.card-tasks-progress {
+  height: 100%;
+  background-color: #025ee1;
+  border-radius: 100px;
+}

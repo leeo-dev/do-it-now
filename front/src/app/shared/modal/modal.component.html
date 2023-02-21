@@ -1,0 +1,12 @@
+<div class="modal-overlay"
+  [ngClass]="{ visible: modalService.isModalOpen(modalId), hidden: !modalService.isModalOpen(modalId) }"></div>
+<div class="modal"
+  [ngClass]="{ visible: modalService.isModalOpen(modalId), hidden: !modalService.isModalOpen(modalId) }">
+  <div class="modal-content">
+    <h2 class='title'>{{ title }}</h2>
+    <ng-content class='content'></ng-content>
+    <div class="modal-buttons">
+      <ng-content select='[footer]'></ng-content>
+    </div>
+  </div>
+</div>

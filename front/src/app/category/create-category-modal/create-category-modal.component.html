@@ -1,0 +1,7 @@
+<form [formGroup]="formCategory" (ngSubmit)="saveCategory($event)">
+  <app-modal [title]="'Create Category'" modalId="category">
+    <input type="text" class='create' placeholder='Ex: Grocery list' formControlName='name'>
+    <button (click)="closeModal()" class='button outline danger' footer>Fechar</button>
+    <button class='button primary' [disabled]="formCategory.invalid" type="submit" footer>Salvar</button>
+  </app-modal>
+</form>
