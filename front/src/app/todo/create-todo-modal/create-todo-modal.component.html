@@ -1,5 +1,7 @@
-<app-modal [title]="'Add Todo'" modalId="todo">
-  <input type="text" class='create' placeholder='Ex: Buy milk'>
-  <button (click)="closeModal()" class='button outline danger' footer>Fechar</button>
-  <button class='button primary' footer>Salvar</button>
-</app-modal>
+<form [formGroup]="todoForm" (ngSubmit)="create($event)">
+  <app-modal [title]="'Add Todo'" modalId="todo">
+    <input type="text" class='create' placeholder='Ex: Buy milk' formControlName='text'>
+    <button (click)="closeModal()" class='button outline danger' footer>Fechar</button>
+    <button class='button primary' footer type='submit' [disabled]="todoForm.invalid">Salvar</button>
+  </app-modal>
+</form>

@@ -11,6 +11,7 @@ import { CreateTodoModalComponent } from './todo/create-todo-modal/create-todo-m
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeleteCategoryModalComponent } from './category/delete-category-modal/delete-category-modal.component';
+import { DeleteTodoModalComponent } from './todo/delete-todo-modal/delete-todo-modal.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { DeleteCategoryModalComponent } from './category/delete-category-modal/d
     TodoComponent,
     CreateTodoModalComponent,
     DeleteCategoryModalComponent,
+    DeleteTodoModalComponent,
   ],
   imports: [
     BrowserModule,

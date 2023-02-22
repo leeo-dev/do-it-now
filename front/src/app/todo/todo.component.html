@@ -16,4 +16,4 @@
     </div>
   </section>
 </main>
-<app-create-todo-modal></app-create-todo-modal>
+<app-create-todo-modal (createEmitter)="createTodo($event)"></app-create-todo-modal>

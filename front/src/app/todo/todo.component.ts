@@ -13,6 +13,7 @@ import { TodoService } from '../services/todo.service';
 })
 export class TodoComponent implements OnInit {
   todos: ITodo[] = [];
+  categoryId: number = 0;
   constructor(
     public modalService: ModalService,
     private route: ActivatedRoute,
@@ -30,7 +31,8 @@ export class TodoComponent implements OnInit {
       this.router.navigate(['/']);
       return;
     }
-    this.loadTodos(id);
+    this.categoryId = id;
+    this.loadTodos();
   }
 
   title: string = 'Grocery List';
@@ -42,7 +44,8 @@ export class TodoComponent implements OnInit {
   }
 
   createTodo(todo: ITodo): void {
-    this.todoService.create(todo).subscribe({
+    const newTodo = Object.assign(todo, { categoryId: this.categoryId });
+    this.todoService.create(newTodo).subscribe({
       next: () => this.onCreateTodoSuccess(),
       error: () => this.onCreateTodoError(),
     });
@@ -53,8 +56,8 @@ export class TodoComponent implements OnInit {
   }
   onCreateTodoError(): void {}
 
-  loadTodos(id: number): void {
-    this.categoryService.loadTodos(id).subscribe({
+  loadTodos(): void {
+    this.categoryService.loadTodos(this.categoryId).subscribe({
       next: (response) => this.onLoadTodosSuccess(response),
       error: () => this.onLoadTodosError(),
     });

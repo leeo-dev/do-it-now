@@ -12,15 +12,19 @@ export class TodoItemComponent {
   @Output() completeEmitter: EventEmitter<number> = new EventEmitter();
   @Output() uncompleteEmitter: EventEmitter<number> = new EventEmitter();
 
+  handleCompleteOrUncomplete(): void {
+    this.todo?.completed ? this.uncomplete() : this.complete();
+  }
+
   delete(): void {
     this.deleteEmitter.emit(this.todo?.id);
   }
 
-  complete(id: number): void {
-    this.completeEmitter.emit(id);
+  complete(): void {
+    this.completeEmitter.emit(this.todo?.id);
   }
 
-  uncomplete(id: number): void {
-    this.uncompleteEmitter.emit(id);
+  uncomplete(): void {
+    this.uncompleteEmitter.emit(this.todo?.id);
   }
 }

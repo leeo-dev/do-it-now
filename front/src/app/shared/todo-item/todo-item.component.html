@@ -1,7 +1,7 @@
 <div class='todo-item'>
   <div>
-    <input type="checkbox" id="checkbox">
-    <label for="checkbox" class='todo-title' [ngClass]="{checked: todo?.completed}">{{ todo?.text }}</label>
+    <input type="checkbox" [id]="todo?.id" (change)="handleCompleteOrUncomplete()" [checked]='todo?.completed'>
+    <label [for]="todo?.id" class='todo-title check' [ngClass]="{checked: todo?.completed}">{{ todo?.text }}</label>
   </div>
   <button class="delete" (click)='delete()'>
     <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
