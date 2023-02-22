@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ModalService } from '../services/modal.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../services/category.service';
@@ -11,9 +11,10 @@ import { TodoService } from '../services/todo.service';
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.css'],
 })
-export class TodoComponent implements OnInit {
+export class TodoComponent implements OnInit, OnDestroy {
   todos: ITodo[] = [];
   categoryId: number = 0;
+  currentId: number = 0;
   constructor(
     public modalService: ModalService,
     private route: ActivatedRoute,
@@ -21,8 +22,16 @@ export class TodoComponent implements OnInit {
     private categoryService: CategoryService,
     private todoService: TodoService
   ) {}
+
   ngOnInit(): void {
     this.loadId();
+    this.modalService.register('todo');
+    this.modalService.register('delete-todo');
+  }
+
+  ngOnDestroy(): void {
+    this.modalService.unregister('todo');
+    this.modalService.unregister('delete-todo');
   }
 
   loadId(): void {
@@ -71,15 +80,21 @@ export class TodoComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  deleteTodo(id: number): void {
-    this.todoService.delete(id).subscribe({
+  confirmDeleteTodo(): void {
+    this.todoService.delete(this.currentId).subscribe({
       next: () => this.onDeleteTodoSuccess(),
       error: () => this.onDeleteTodoError(),
     });
   }
 
+  deleteTodo(id: number): void {
+    this.currentId = id;
+    this.modalService.toggleModal('delete-todo');
+  }
+
   onDeleteTodoSuccess(): void {
     this.loadId();
+    this.modalService.toggleModal('delete-todo');
   }
   onDeleteTodoError(): void {}
 
