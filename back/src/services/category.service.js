@@ -1,27 +1,38 @@
 const { CategoryRepository } = require('../repository/category.repository');
+const { Category } = require('../entities/category.entity.js');
 
 class CategoryService {
   constructor({ category }) {
-    this.category = new CategoryRepository({ category });
+    this.categoryRepository = new CategoryRepository({ category });
   }
 
   async create({ name }) {
-    const category = await this.category.create({ name });
+    const newCategory = new Category({ name });
+    const category = await this.categoryRepository.create(newCategory);
     return category;
   }
 
   async findAll() {
-    const categories = await this.category.findAll();
+    const categories = await this.categoryRepository.findAll();
     return categories;
   }
 
+  async findById({ id }) {
+    const todo = await this.categoryRepository.findById({ id });
+    return todo;
+  }
+
   async delete({ id }) {
-    await this.category.delete({ id });
+    const categoryExists = await this.findById({ id });
+    if (!categoryExists) return false;
+    await this.categoryRepository.delete({ id });
+    return true;
   }
 
   async findTodosById({ id }) {
-    const todos = await this.category.findTodosById({ id });
+    const todos = await this.categoryRepository.findTodosById({ id });
+    return todos;
   }
 }
 
-module.exports = { CategoryService };
+module.exports = CategoryService;

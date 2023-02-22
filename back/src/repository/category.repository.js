@@ -19,6 +19,14 @@ class CategoryRepository {
     await this.category.delete({ where: { id } });
   }
 
+  async findById({ id }) {
+    const category = await this.category.findUnique({
+      where: { id },
+    });
+
+    return category;
+  }
+
   async findTodosById({ id }) {
     const category = await this.category.findUnique({
       where: { id },

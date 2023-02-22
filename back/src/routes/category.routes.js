@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const { prisma } = require('../helpers/prisma.init.js');
+const categoryController = require('../controllers/category.controller.js');
 const categoryRouter = Router();
 
 categoryRouter.get('/', async (req, res) => {
@@ -29,24 +30,7 @@ categoryRouter.get('/:categoryId/todos', async (req, res) => {
   }
 });
 
-categoryRouter.post('/', async (req, res) => {
-  const { name } = req.body;
-  try {
-    if (!name) return res.json({ error: 'Name must be provided' });
-    const categoryExists = await prisma.category.findFirst({ where: { name } });
-    if (categoryExists) return res.json({ error: 'Category already exists' });
-    const category = await prisma.category.create({
-      data: {
-        name,
-      },
-      include: { todos: true },
-    });
-    res.json(category);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
+categoryRouter.post('/', categoryController.create);
 
 categoryRouter.get('/:id', async (req, res) => {
   const { id } = req.params;
