@@ -10,10 +10,9 @@
       <p class='todo-info'>{{tasks.all}} tasks - {{tasks.completed}} Completed</p>
     </div>
     <div class="todo-list">
-      <app-todo-item class='todo-item'></app-todo-item>
-      <app-todo-item class='todo-item'></app-todo-item>
-      <app-todo-item class='todo-item'></app-todo-item>
-      <app-todo-item class='todo-item'></app-todo-item>
+      <app-todo-item (deleteEmitter)="deleteTodo($event)" (completeEmitter)="completeTodo($event)"
+        (uncompleteEmitter)="uncompleteTodo($event)" *ngFor="let todo of todos;" [todo]="todo"
+        class='todo-item'></app-todo-item>
     </div>
   </section>
 </main>

@@ -48,6 +48,7 @@ class CategoryController {
     try {
       const { id } = request.params;
       const todos = await categoryService.findTodosById({ id });
+      if (!todos) return notFound({ entity: 'Category', response });
       return ok({ content: todos, response });
     } catch (error) {
       return serverError({ error, response });

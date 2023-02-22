@@ -30,6 +30,8 @@ class CategoryService {
   }
 
   async findTodosById({ id }) {
+    const category = await this.categoryRepository.findById({ id });
+    if (!category) return false;
     const todos = await this.categoryRepository.findTodosById({ id });
     return todos;
   }
