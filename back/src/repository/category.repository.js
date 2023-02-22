@@ -20,16 +20,19 @@ class CategoryRepository {
   }
 
   async findById({ id }) {
+    const categoryId = Number(id);
     const category = await this.category.findUnique({
-      where: { id },
+      where: { id: categoryId },
+      include: { todos: true },
     });
 
     return category;
   }
 
   async findTodosById({ id }) {
+    const categoryId = Number(id);
     const category = await this.category.findUnique({
-      where: { id },
+      where: { id: categoryId },
       include: { todos: true },
     });
 

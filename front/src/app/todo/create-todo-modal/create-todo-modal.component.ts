@@ -35,7 +35,7 @@ export class CreateTodoModalComponent implements OnInit, OnDestroy {
   }
 
   resetForm(): void {
-    this.todoForm.reset;
+    this.todoForm.reset();
   }
 
   ngOnDestroy(): void {

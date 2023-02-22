@@ -1,20 +1,22 @@
 <app-header></app-header>
-<main class='todo'>
-  <div class="search-container">
-    <input type="text" name="search" id="search" placeholder='Search'>
-    <button class='create' (click)="openModal()">+</button>
-  </div>
-  <section class='todos'>
-    <div class='todo-header'>
-      <h2 class='todo-title'>{{ title }}</h2>
-      <p class='todo-info'>{{tasks.all}} tasks - {{tasks.completed}} Completed</p>
+<form [formGroup]="searchForm">
+  <main class='todo'>
+    <div class="search-container">
+      <input type="text" name="search" id="search" placeholder='Search' (keyup)="search()" formControlName='search'>
+      <button class='create' (click)="openModal()">+</button>
     </div>
-    <div class="todo-list">
-      <app-todo-item (deleteEmitter)="deleteTodo($event)" (completeEmitter)="completeTodo($event)"
-        (uncompleteEmitter)="uncompleteTodo($event)" *ngFor="let todo of todos;" [todo]="todo"
-        class='todo-item'></app-todo-item>
-    </div>
-  </section>
-</main>
+    <section class='todos'>
+      <div class='todo-header'>
+        <h2 class='todo-title'>{{ category?.name }}</h2>
+        <p class='todo-info'>{{allTasks}} Task{{allTasks > 1 ? 's' : ''}} - {{completedTasks}} Completed</p>
+      </div>
+      <div class="todo-list">
+        <app-todo-item (deleteEmitter)="deleteTodo($event)" (completeEmitter)="completeTodo($event)"
+          (uncompleteEmitter)="uncompleteTodo($event)" *ngFor="let todo of todoList;" [todo]="todo"
+          class='todo-item'></app-todo-item>
+      </div>
+    </section>
+  </main>
+</form>
 <app-create-todo-modal (createEmitter)="createTodo($event)"></app-create-todo-modal>
 <app-delete-todo-modal (confirmDelete)="confirmDeleteTodo()"></app-delete-todo-modal>

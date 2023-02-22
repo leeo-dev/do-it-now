@@ -5,6 +5,8 @@ import { CategoryService } from '../services/category.service';
 import { ITodo } from '../interfaces/todo.interface';
 import { ICategory } from '../interfaces/category.interface';
 import { TodoService } from '../services/todo.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { searchItems } from 'src/helpers/search-item';
 
 @Component({
   selector: 'app-todo',
@@ -12,19 +14,24 @@ import { TodoService } from '../services/todo.service';
   styleUrls: ['./todo.component.css'],
 })
 export class TodoComponent implements OnInit, OnDestroy {
-  todos: ITodo[] = [];
+  category?: ICategory;
   categoryId: number = 0;
+  todoList: ITodo[] = [];
   currentId: number = 0;
+  searchForm: FormGroup = new FormGroup({});
   constructor(
     public modalService: ModalService,
     private route: ActivatedRoute,
     private router: Router,
     private categoryService: CategoryService,
+    private formBuilder: FormBuilder,
     private todoService: TodoService
   ) {}
 
   ngOnInit(): void {
     this.loadId();
+    this.setUpForm();
+
     this.modalService.register('todo');
     this.modalService.register('delete-todo');
   }
@@ -41,15 +48,32 @@ export class TodoComponent implements OnInit, OnDestroy {
       return;
     }
     this.categoryId = id;
-    this.loadTodos();
+    this.loadCategoryAndTodos();
   }
 
-  title: string = 'Grocery List';
+  search(): void {
+    this.todoList = searchItems(
+      this.category!.todos,
+      this.searchForm.get('search')?.value,
+      'text'
+    );
+  }
 
-  tasks = { all: 8, completed: 5 };
+  setUpForm(): void {
+    this.searchForm = this.formBuilder.group({
+      search: [null],
+    });
+  }
 
   openModal(): void {
     this.modalService.toggleModal('todo');
+  }
+
+  get allTasks(): number {
+    return this.todoList.length;
+  }
+  get completedTasks(): number {
+    return this.todoList.filter((todo) => todo.completed).length;
   }
 
   createTodo(todo: ITodo): void {
@@ -65,15 +89,16 @@ export class TodoComponent implements OnInit, OnDestroy {
   }
   onCreateTodoError(): void {}
 
-  loadTodos(): void {
-    this.categoryService.loadTodos(this.categoryId).subscribe({
+  loadCategoryAndTodos(): void {
+    this.categoryService.findById(this.categoryId).subscribe({
       next: (response) => this.onLoadTodosSuccess(response),
       error: () => this.onLoadTodosError(),
     });
   }
 
-  onLoadTodosSuccess(todos: ITodo[]): void {
-    this.todos = todos;
+  onLoadTodosSuccess(category: ICategory): void {
+    this.category = category;
+    this.todoList = category.todos;
   }
 
   onLoadTodosError(): void {

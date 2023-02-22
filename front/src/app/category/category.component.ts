@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ModalService } from '../services/modal.service';
 import { CategoryService } from '../services/category.service';
 import { ICategory, ICategoryParam } from '../interfaces/category.interface';
+import { searchItems } from 'src/helpers/search-item';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-category',
@@ -11,20 +13,38 @@ import { ICategory, ICategoryParam } from '../interfaces/category.interface';
 export class CategoryComponent implements OnInit, OnDestroy {
   title: string = 'Categories';
   categories: ICategory[] = [];
+  categoriesList: ICategory[] = [];
   currentId: number = 0;
+  searchForm: FormGroup = new FormGroup({});
 
   constructor(
     public modalService: ModalService,
+    private formBuilder: FormBuilder,
     private categoryService: CategoryService
   ) {}
   ngOnInit(): void {
     this.modalService.register('category');
     this.modalService.register('delete-category');
     this.listCategories();
+    this.setUpForm();
   }
   ngOnDestroy(): void {
     this.modalService.unregister('category');
     this.modalService.unregister('delete-category');
+  }
+
+  setUpForm(): void {
+    this.searchForm = this.formBuilder.group({
+      search: [null],
+    });
+  }
+
+  search(): void {
+    this.categoriesList = searchItems(
+      this.categories,
+      this.searchForm.get('search')?.value,
+      'name'
+    );
   }
 
   openModal(id: string): void {
@@ -40,6 +60,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
   onListCategoriesSuccess(categories: ICategory[]): void {
     this.categories = categories;
+    this.categoriesList = this.categories;
   }
 
   onListCategoriesError(error: unknown): void {}

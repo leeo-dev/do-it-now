@@ -31,20 +31,7 @@ categoryRouter.get('/:categoryId/todos', async (req, res) => {
 });
 
 categoryRouter.post('/', categoryController.create);
-
-categoryRouter.get('/:id', async (req, res) => {
-  const { id } = req.params;
-  try {
-    const category = await prisma.category.findUnique({
-      where: { id: Number(id) },
-    });
-    if (!category) return res.status(400).json({ error: `Category not found` });
-    res.json(category);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
+categoryRouter.get('/:id', categoryController.findTodosById);
 
 categoryRouter.put('/:id', async (req, res) => {
   const { name } = req.body;

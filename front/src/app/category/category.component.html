@@ -1,16 +1,18 @@
 <app-header></app-header>
-<main class='category'>
-  <div class="search-container">
-    <input type="text" name="search" id="search" placeholder='Search'>
-    <button class='create' (click)="openModal('category')">+</button>
-  </div>
-  <section class='categories'>
-    <h1 class='title'>{{ title | uppercase }}</h1>
-    <div class="category-cards">
-      <app-card (deleteCategoryEmitter)="handleDeleteCategory($event)" *ngFor="let category of categories"
-        [category]="category"></app-card>
+<form [formGroup]="searchForm">
+  <main class='category'>
+    <div class="search-container">
+      <input type="text" name="search" id="search" (keyup)="search()" placeholder='Search' formControlName='search'>
+      <button class='create' (click)="openModal('category')">+</button>
     </div>
-  </section>
-</main>
+    <section class='categories'>
+      <h1 class='title'>{{ title | uppercase }}</h1>
+      <div class="category-cards">
+        <app-card (deleteCategoryEmitter)="handleDeleteCategory($event)" *ngFor="let category of categoriesList"
+          [category]="category"></app-card>
+      </div>
+    </section>
+  </main>
+</form>
 <app-create-category-modal (categoryEmitter)="saveCategory($event)"></app-create-category-modal>
 <app-delete-category-modal (confirmDelete)="deleteCategory($event)"></app-delete-category-modal>

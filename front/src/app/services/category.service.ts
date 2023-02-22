@@ -16,6 +16,10 @@ export class CategoryService {
     return this.http.get<ICategory[]>(this.pathCategory);
   }
 
+  findById(id: number): Observable<ICategory> {
+    return this.http.get<ICategory>(`${this.pathCategory}/${id}`);
+  }
+
   create(category: { name: string }): Observable<ICategory> {
     return this.http.post<ICategory>(this.pathCategory, category);
   }
